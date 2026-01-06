@@ -23,6 +23,9 @@ public class Main {
             System.out.print("Digite um número: ");
             int n = scanner.nextInt();
 
+            if (operation == '/' && n == 0)
+                throw new IllegalArgumentException("Não é possivel dividir por 0.");
+
             switch (operation) {
                 case '+':
                     calculator.add(n);
@@ -63,6 +66,9 @@ public class Main {
 
         System.out.print("Digite o segundo número: ");
         int n2 = scanner.nextInt();
+
+        if (operation == '/' && n2 == 0)
+            throw new IllegalArgumentException("Não é possivel dividir por 0.");
 
         switch (operation) {
             case '+':
