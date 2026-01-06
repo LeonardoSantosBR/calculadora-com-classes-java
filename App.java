@@ -1,25 +1,45 @@
 public class App {
     public int value = 0;
 
-    public int add(int new_value){
-        value += new_value;
+    public int addFirstTime(int n1, int n2){
+        value = n1 + n2;
         return value;
     };
 
-    public int subtract(int new_value){
-        value -= new_value;
+    public int add(int n){
+        value += n;
+        return value;
+    };
+
+    public int subtractFirstTime(int n1, int n2){
+        value = n1 - n2;
         return value;
     }
 
-    public int divide(int new_value){
-        value /= new_value;
+    public int subtract(int n){
+        value -= n;
+        return value;
+    };
+
+    public int divideFirstTime(int n1, int n2){
+        value = n1 / n2;
         return value;
     }
 
-    public int multiply(int new_value){
-        value *= new_value;
+    public int divide(int n){
+        value /= n;
+        return value;
+    };
+
+    public int multiplyFirstTime(int n1, int n2){
+        value = n1 * n2;
         return value;
     }
+
+    public int multiply(int n){
+        value *= n;
+        return value;
+    };
 
     public int reset(){
         value = 0;
