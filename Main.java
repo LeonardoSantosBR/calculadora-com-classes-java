@@ -17,13 +17,10 @@ public class Main {
                 continue;
             }
 
-            System.out.println("Digite a operação: (+, -, *, /, C)");
+            System.out.print("Digite a operação (+, -, *, /, C): ");
             char operation = scanner.next().charAt(0);
 
-            if (operation != '+' || operation != '-' || operation != '*' || operation != '/' || operation != 'C')
-                throw new IllegalArgumentException("Operação inválida.");
-
-            System.out.println("Digite um número:");
+            System.out.print("Digite um número: ");
             int n = scanner.nextInt();
 
             switch (operation) {
@@ -49,25 +46,22 @@ public class Main {
             System.out.print("Deseja finalizar a operação (s, n)?");
             char is_finished = scanner.next().charAt(0);
 
-            if (is_finished == 's')
+            if (is_finished == 's') {
                 in_operation = false;
+                System.out.println("Resultado final: " + calculator.value);
+                scanner.close();
+            }
         }
-        ;
-        System.out.println("Resultado final: " + calculator.value);
-        scanner.close();
     }
 
     private static boolean firstOperation(Scanner scanner, App calculator) {
-        System.out.println("Digite o primeiro número:");
+        System.out.print("Digite o primeiro número: ");
         int n1 = scanner.nextInt();
 
-        System.out.println("Digite a operação: (+, -, *, /, C)");
+        System.out.print("Digite a operação (+, -, *, /, C): ");
         char operation = scanner.next().charAt(0);
 
-        if (operation != '+' || operation != '-' || operation != '*' || operation != '/' || operation != 'C')
-            throw new IllegalArgumentException("Operação inválida.");
-
-        System.out.println("Digite o segundo número:");
+        System.out.print("Digite o segundo número: ");
         int n2 = scanner.nextInt();
 
         switch (operation) {
@@ -90,9 +84,14 @@ public class Main {
                 System.out.println("Operação inválida");
         }
 
-        System.out.print("Deseja finalizar a operação (s, n)?");
-        char isFinished = scanner.next().charAt(0);
+        System.out.print("Deseja finalizar a operação? (s, n)");
+        char is_finished = scanner.next().charAt(0);
 
-        return isFinished == 's';
+        if (is_finished == 's') {
+            System.out.println("Resultado final: " + calculator.value);
+            scanner.close();
+        }
+
+        return is_finished == 's';
     }
 }
