@@ -9,51 +9,17 @@ public class Main {
 
         while (in_operation) {
             if (is_first_time) {
-                boolean finish = firstOperation(scanner, calculator);
-                if (finish)
+                boolean is_finished = firstOperation(scanner, calculator);
+                if (is_finished)
                     break;
 
                 is_first_time = false;
                 continue;
             }
 
-            System.out.print("Digite a operação (+, -, *, /, C): ");
-            char operation = scanner.next().charAt(0);
-
-            System.out.print("Digite um número: ");
-            int n = scanner.nextInt();
-
-            if (operation == '/' && n == 0)
-                throw new IllegalArgumentException("Não é possivel dividir por 0.");
-
-            switch (operation) {
-                case '+':
-                    calculator.add(n);
-                    break;
-                case '-':
-                    calculator.subtract(n);
-                    break;
-                case '*':
-                    calculator.multiply(n);
-                    break;
-                case '/':
-                    calculator.divide(n);
-                    break;
-                case 'C':
-                    calculator.reset();
-                    break;
-                default:
-                    break;
-            }
-
-            System.out.print("Deseja finalizar a operação (s, n)?");
-            char is_finished = scanner.next().charAt(0);
-
-            if (is_finished == 's') {
-                in_operation = false;
-                System.out.println("Resultado final: " + calculator.value);
-                scanner.close();
-            }
+            boolean is_finished = operation(scanner, calculator);
+            if (is_finished)
+                break;
         }
     }
 
@@ -98,6 +64,46 @@ public class Main {
             scanner.close();
         }
 
+        return is_finished == 's';
+    }
+
+    private static boolean operation(Scanner scanner, App calculator) {
+        System.out.print("Digite a operação (+, -, *, /, C): ");
+        char operation = scanner.next().charAt(0);
+
+        System.out.print("Digite um número: ");
+        int n = scanner.nextInt();
+
+        if (operation == '/' && n == 0)
+            throw new IllegalArgumentException("Não é possivel dividir por 0.");
+
+        switch (operation) {
+            case '+':
+                calculator.add(n);
+                break;
+            case '-':
+                calculator.subtract(n);
+                break;
+            case '*':
+                calculator.multiply(n);
+                break;
+            case '/':
+                calculator.divide(n);
+                break;
+            case 'C':
+                calculator.reset();
+                break;
+            default:
+                break;
+        }
+
+        System.out.print("Deseja finalizar a operação (s, n)?");
+        char is_finished = scanner.next().charAt(0);
+
+        if (is_finished == 's') {
+            System.out.println("Resultado final: " + calculator.value);
+            scanner.close();
+        }
         return is_finished == 's';
     }
 }
