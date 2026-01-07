@@ -4,26 +4,52 @@ public class Main {
     public static void main(String[] args) {
         App calculator = new App();
         Scanner scanner = new Scanner(System.in);
-        boolean in_operation = true;
-        boolean is_first_time = true;
+        boolean inOperation = true;
+        boolean isFirstTime = true;
 
-        while (in_operation) {
-            if (is_first_time) {
-                boolean is_finished = firstOperation(scanner, calculator);
-                if (is_finished)
+        while (inOperation) {
+            if (isFirstTime) {
+                boolean isFinished = firstOperation(scanner, calculator);
+                if (isFinished)
                     break;
 
-                is_first_time = false;
+                isFirstTime = false;
                 continue;
             }
 
-            boolean is_finished = operation(scanner, calculator);
+            boolean is_finished = subsequentOperation(scanner, calculator);
             if (is_finished)
                 break;
         }
     }
 
     private static boolean firstOperation(Scanner scanner, App calculator) {
+        validationFirstOperation(scanner, calculator);
+
+        System.out.print("Deseja finalizar a operação, (s, n) ? ");
+        char isFinished = scanner.next().charAt(0);
+
+        if (isFinished == 's') {
+            System.out.println("Resultado final: " + calculator.value);
+            scanner.close();
+        }
+        return isFinished == 's';
+    }
+
+    private static boolean subsequentOperation(Scanner scanner, App calculator) {
+       validationSubsequentOperation(scanner, calculator);
+
+        System.out.print("Deseja finalizar a operação, (s, n)? ");
+        char isFinished = scanner.next().charAt(0);
+
+        if (isFinished == 's') {
+            System.out.println("Resultado final: " + calculator.value);
+            scanner.close();
+        }
+        return isFinished == 's';
+    }
+
+    private static void validationFirstOperation(Scanner scanner, App calculator) {
         System.out.print("Digite o primeiro número: ");
         int n1 = scanner.nextInt();
 
@@ -55,19 +81,9 @@ public class Main {
             default:
                 System.out.println("Operação inválida");
         }
-
-        System.out.print("Deseja finalizar a operação? (s, n)");
-        char is_finished = scanner.next().charAt(0);
-
-        if (is_finished == 's') {
-            System.out.println("Resultado final: " + calculator.value);
-            scanner.close();
-        }
-
-        return is_finished == 's';
     }
 
-    private static boolean operation(Scanner scanner, App calculator) {
+    private static void validationSubsequentOperation(Scanner scanner, App calculator) {
         System.out.print("Digite a operação (+, -, *, /, C): ");
         char operation = scanner.next().charAt(0);
 
@@ -96,14 +112,5 @@ public class Main {
             default:
                 break;
         }
-
-        System.out.print("Deseja finalizar a operação (s, n)?");
-        char is_finished = scanner.next().charAt(0);
-
-        if (is_finished == 's') {
-            System.out.println("Resultado final: " + calculator.value);
-            scanner.close();
-        }
-        return is_finished == 's';
     }
 }
